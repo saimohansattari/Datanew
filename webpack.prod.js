@@ -7,8 +7,3 @@ module.exports = merge(common, {
   // Other production settings...
 });
  
-"scripts": {
-  "start": "webpack serve --config webpack.dev.js --env NODE_ENV=development",
-  "build:dev": "webpack --config webpack.prod.js --env NODE_ENV=development",
-  "build:prod": "webpack --config webpack.prod.js --env NODE_ENV=production"
-}

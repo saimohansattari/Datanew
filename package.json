@@ -19,7 +19,7 @@
   "scripts": {
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production",
-    "audit": "npm audit"
+    "audit": "npm audit --audit-level=critical"
   },
   "eslintConfig": {
     "extends": [
