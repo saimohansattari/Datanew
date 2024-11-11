@@ -1,0 +1,7 @@
+.css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input:focus {
+  outline: none;
+  border: none;
+}
+.css-1dune0f-MuiInputBase-input-MuiOutlinedInput-input{
+  border: none !important;
+}

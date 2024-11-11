@@ -1,0 +1,26 @@
+/* Dashboard.css */
+
+.dashboard {
+    background-color: #f9f9f9; /* Light background color */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding around the dashboard */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 800px; /* Maximum width of the dashboard */
+    margin: 20px auto; /* Center the dashboard on the page */
+  }
+  
+  .dashboard h3 {
+    margin-bottom: 20px; /* Space below the main heading */
+    color: #333; /* Dark text color */
+    text-align: center; /* Center the heading */
+  }
+  
+  .inventory-section {
+    margin-top: 30px; /* Space above the inventory section */
+  }
+  
+  .inventory-section h4 {
+    margin-bottom: 15px; /* Space below the subheading */
+    color: #333; /* Dark text color */
+  }
+  

@@ -1,0 +1,50 @@
+/* components/Navbar/Navbar.css */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #1976d2; /* A blue shade */
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-link {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 20px;
+  transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+  color: #bbdefb; /* Light blue on hover */
+}
+
+.navbar-icon {
+  margin-right: 8px;
+}
+
+.navbar-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.navbar-button:hover {
+  color: #bbdefb;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navbar-link {
+    margin: 10px 0;
+  }
+}

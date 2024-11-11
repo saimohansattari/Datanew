@@ -1,0 +1,169 @@
+/* Main container styling */
+.audit-history {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 30px auto;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.audit-history h3 {
+  color: #333;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+/* Search bar container styling */
+.audit-history-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+.search-icon {
+  color: #007bff;
+  margin-right: 8px;
+}
+
+/* Dropdown and Date Pickers styling */
+.audit-filter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.select-dropdown, .date-picker {
+  width: 200px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.select-dropdown:focus, .date-picker:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  outline: none;
+}
+
+/* Table styling */
+.audit-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.audit-history-table th,
+.audit-history-table td {
+  padding: 12px;
+  text-align: center;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+/* Header row styling */
+.audit-history-table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+}
+
+.audit-history-table th:hover {
+  background-color: #0069d9;
+}
+
+.sort-icon {
+  margin-left: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sort-icon:hover {
+  color: #d0d0d0;
+}
+
+/* Even rows for better readability */
+.audit-history-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+.audit-history-table tr:hover {
+  background-color: #eef7ff;
+}
+
+/* Table cell styling */
+.audit-history-table td {
+  padding: 10px;
+  font-size: 0.95rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .audit-history {
+      padding: 15px;
+  }
+
+  .audit-history h3 {
+      font-size: 1.5rem;
+  }
+
+  .search-input, .select-dropdown, .date-picker {
+      font-size: 0.9rem;
+  }
+
+  .audit-history-table th,
+  .audit-history-table td {
+      font-size: 0.9rem;
+      padding: 8px;
+  }
+}
+
+@media (max-width: 500px) {
+  .audit-history {
+      padding: 10px;
+  }
+
+  .search-input, .select-dropdown, .date-picker {
+      font-size: 0.85rem;
+      width: 100%;
+  }
+
+  .audit-history-table th,
+  .audit-history-table td {
+      font-size: 0.85rem;
+      padding: 6px;
+  }
+}

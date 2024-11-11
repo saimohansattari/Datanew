@@ -1,0 +1,28 @@
+.typoGraphySection {
+ 
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6rem;
+  align-items: center;
+}
+ 
+body {
+  background-color: whitesmoke;
+}
+ 
+.searchInput{
+  background-color: white;
+  width: 50%;
+}
+ 
+.css-13meb6w-MuiInputBase-input-MuiOutlinedInput-input{
+  border: none !important;
+}
+ 
+.fa-magnifying-glass{
+  color: #1976d2;
+}
+ 
+form {
+  margin-bottom: 7rem;
+}
