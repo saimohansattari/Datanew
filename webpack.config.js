@@ -38,7 +38,7 @@ module.exports = {
     }),
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,  // Development server port
     hot: true,  // Enable hot reloading
