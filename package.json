@@ -16,6 +16,8 @@
     "recharts": "^2.13.3",
     "web-vitals": "^2.1.4"
   },
+
+  
   "scripts": {
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production",

@@ -1,15 +1,16 @@
 // App.js
 import React, { useContext } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { AuthProvider, AuthContext } from './context/AuthContext';
-import { AssetProvider } from './context/AssetContext';
-import Navbar from './components/Navbar/Navbar';
-import Dashboard from './components/Dashboard/Dashboard';
-import ProcureAsset from './components/ProcureAsset/ProcureAsset';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import AllocateAsset from './components/AllocateAsset/AllocateAsset';
 import AuditHistory from './components/AuditHistory/AuditHistory';
+import Dashboard from './components/Dashboard/Dashboard';
 import EditAsset from './components/EditAsset';
+import { LogAsset } from './components/LogAsset/LogAsset';
 import Login from './components/Login/Login';
+import Navbar from './components/Navbar/Navbar';
+import ProcureAsset from './components/ProcureAsset/ProcureAsset';
+import { AssetProvider } from './context/AssetContext';
+import { AuthContext, AuthProvider } from './context/AuthContext';
 import './styles.css';
 
 const AppRoutes = () => {
@@ -25,6 +26,7 @@ const AppRoutes = () => {
           <Route path="/procure-asset" element={<ProcureAsset />} />
           <Route path="/allocate-asset" element={<AllocateAsset />} />
           <Route path="/audit-history" element={<AuditHistory />} />
+          <Route path="/log-history" element={<LogAsset/>} />
           <Route path="/edit-asset/:assetID" element={<EditAsset />} />
           <Route path="*" element={<Navigate to="/" />} />
         </>

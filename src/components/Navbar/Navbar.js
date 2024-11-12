@@ -7,7 +7,7 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import LoginIcon from '@mui/icons-material/Login';
-import './Navbar.css'; // Import the CSS file for Navbar styles
+import './Navbar.css'; 
 
 const Navbar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
@@ -27,6 +27,10 @@ const Navbar = () => {
           <Link to="/audit-history" className="navbar-link">
             <AssignmentIcon className="navbar-icon" />
             Asset Data
+          </Link>
+          <Link to="/log-history" className="navbar-link">
+            <AssignmentIcon className="navbar-icon" />
+            Log History
           </Link>
           <button onClick={logout} className="navbar-link navbar-button">
             <ExitToAppIcon className="navbar-icon" />
