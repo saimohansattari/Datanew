@@ -1,9 +1,9 @@
 /* Main container styling */
 .audit-history {
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 10%);
   max-width: 900px;
   margin: 30px auto;
   font-family: Arial, sans-serif;
@@ -41,7 +41,7 @@
 
 .search-input:focus {
   border-color: #007bff;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+  box-shadow: 0 0 8px rgb(0 123 255 / 20%);
   outline: none;
 }
 
@@ -71,7 +71,7 @@
 
 .select-dropdown:focus, .date-picker:focus {
   border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+  box-shadow: 0 0 5px rgb(0 123 255 / 20%);
   outline: none;
 }
 
@@ -80,7 +80,7 @@
   width: 100%;
   border-collapse: collapse;
   overflow: hidden;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 14px rgb(0 0 0 / 10%);
 }
 
 .audit-history-table th,
@@ -106,7 +106,7 @@
 
 .sort-icon {
   margin-left: 6px;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
   transition: color 0.3s ease;
 }
@@ -131,7 +131,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .audit-history {
       padding: 15px;
   }
@@ -151,7 +151,7 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (width <= 500px) {
   .audit-history {
       padding: 10px;
   }

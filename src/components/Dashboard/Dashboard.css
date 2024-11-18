@@ -4,7 +4,7 @@
     background-color: #f9f9f9; /* Light background color */
     border-radius: 8px; /* Rounded corners */
     padding: 20px; /* Padding around the dashboard */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%); /* Subtle shadow for depth */
     max-width: 800px; /* Maximum width of the dashboard */
     margin: 20px auto; /* Center the dashboard on the page */
   }

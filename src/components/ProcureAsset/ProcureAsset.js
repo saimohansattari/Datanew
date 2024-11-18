@@ -69,7 +69,11 @@ const ProcureAsset = () => {
   
 
     try {
-      const response = await axios.post('http://localhost:8080/api/assets', newAsset);
+      const response = await axios.post('http://localhost:8080/api/assets', newAsset, {
+        headers : {
+          // Authorization: `Bearer ${}`
+        }
+      });
       addAsset(response.data);
       setTableData((prev) => [...prev, response.data]);
       resetForm();
@@ -169,13 +173,13 @@ const ProcureAsset = () => {
               <InputLabel>Vendor *</InputLabel>
               <Select name="vendor" value={assetData.vendor} onChange={handleChange} variant="outlined" required>
                 <MenuItem value="C_PROMPT">C_PROMPT</MenuItem>
-                <MenuItem value="Sriveda">Sriveda</MenuItem>
-                <MenuItem value="CTC_Adiko">CTC_Adiko</MenuItem>
-                <MenuItem value="Butterfly">Butterfly</MenuItem>
-                <MenuItem value="Lappycare">Lappycare</MenuItem>
-                <MenuItem value="Lenovo_KPHB">Lenovo_KPHB</MenuItem>
-                <MenuItem value="Lenovo_Madhapur">Lenovo_Madhapur</MenuItem>
-                <MenuItem value="Lenovo_HSR_Layout">Lenovo_HSR_Layout</MenuItem>
+                <MenuItem value="SRIVEDA">SRIVEDA</MenuItem>
+                <MenuItem value="CTC_ADIKO">CTC_ADIKO</MenuItem>
+                <MenuItem value="BUTTERFLY">BUTTERFLY</MenuItem>
+                <MenuItem value="LAPPYCARE">LAPPYCARE</MenuItem>
+                <MenuItem value="LENOVO_KPHB">LENOVO_KPHB</MenuItem>
+                <MenuItem value="LENOVO_MADHAPUR">LENOVO_MADHAPUR</MenuItem>
+                <MenuItem value="LENOVO_HSR_LAYOUT">LENOVO_HSR_LAYOUT</MenuItem>
                 <MenuItem value="UD">UD</MenuItem>
                
               </Select>

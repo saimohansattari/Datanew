@@ -7,6 +7,7 @@ import EditAsset from './components/EditAsset';
 import { LogAsset } from './components/LogAsset/LogAsset';
 import Login from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
+import PdfExtract from './components/PdfExtract';
 import ProcureAsset from './components/ProcureAsset/ProcureAsset';
 import { AssetProvider } from './context/AssetContext';
 import { AuthContext, AuthProvider } from './context/AuthContext';
@@ -29,6 +30,8 @@ const AppRoutes = () => {
       ) : (
         <>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/pdf" element={<PdfExtract />} />
+          
           <Route path="/procure-asset" element={<ProcureAsset />} />
           <Route path="/allocate-asset" element={<AllocateAsset />} />
           <Route path="/audit-history" element={<AuditHistory />} />
