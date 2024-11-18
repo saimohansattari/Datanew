@@ -1,6 +1,5 @@
-// App.js
 import React, { useContext } from 'react';
-import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Navigate, Route, HashRouter as Router, Routes } from 'react-router-dom';
 import AllocateAsset from './components/AllocateAsset/AllocateAsset';
 import AuditHistory from './components/AuditHistory/AuditHistory';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -13,9 +12,16 @@ import { AssetProvider } from './context/AssetContext';
 import { AuthContext, AuthProvider } from './context/AuthContext';
 import './styles.css';
 
+
+
+// useEffect(() => {
+//   LogRocket.init('c38d1cd9-bf1b-452c-9808-465b80069a19');
+// }, []);
+
+ 
 const AppRoutes = () => {
   const { isAuthenticated } = useContext(AuthContext);
-
+ 
   return (
     <Routes>
       {!isAuthenticated ? (
@@ -34,7 +40,7 @@ const AppRoutes = () => {
     </Routes>
   );
 };
-
+ 
 const App = () => {
   return (
     <AuthProvider>
@@ -47,5 +53,5 @@ const App = () => {
     </AuthProvider>
   );
 };
-
+ 
 export default App;

@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { AssetContext } from '../../context/AssetContext';
-import { Grid, TextField, FormControl, InputLabel, Select, MenuItem, Button, Typography, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, InputAdornment } from '@mui/material';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
+import { Box, Button, FormControl, Grid, InputAdornment, InputLabel, MenuItem, Paper, Select, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { AssetContext } from '../../context/AssetContext';
 
 const ProcureAsset = () => {
   const { assets, addAsset, updateAsset } = useContext(AssetContext);
@@ -35,6 +36,9 @@ const ProcureAsset = () => {
   const [confirmationMessage, setConfirmationMessage] = useState(false);
   const [editingAsset, setEditingAsset] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [tableData, setTableData] = useState([]);
+  
+
 
   const currentYear = new Date().getFullYear();
   const years = [];
@@ -46,6 +50,40 @@ const ProcureAsset = () => {
     const { name, value } = event.target;
     setAssetData((prev) => ({ ...prev, [name]: value }));
   };
+
+
+
+
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/assets').then((res) => {
+    setTableData(res.data)
+  })
+  },[])
+
+  const handleProcure = async (e) => {
+    e.preventDefault();
+    const uniqueHostID = Date.now().toString(); 
+    const newAsset = { ...assetData, hostID: uniqueHostID  };
+
+  
+
+    try {
+      const response = await axios.post('http://localhost:8080/api/assets', newAsset);
+      addAsset(response.data);
+      setTableData((prev) => [...prev, response.data]);
+      resetForm();
+      console.log('New record added:', response.data);
+    } catch (error) {
+      console.error('Error saving asset:', error);
+    }
+
+
+
+    
+  };
+
+
 
   const handleFileUpload = (event) => {
     const files = Array.from(event.target.files);
@@ -63,13 +101,6 @@ const ProcureAsset = () => {
     }
   };
 
-  // const handleDeleteLink = (linkToDelete) => {
-  //   setAssetData((prevAssets) =>
-  //     prevAssets.map((asset) =>
-  //       asset.link === linkToDelete ? { ...asset, link: '' } : asset
-  //     )
-  //   );
-  // };
 
   const handleFileDelete = (fileName) => {
     setAssetData((prev) => ({
@@ -78,13 +109,7 @@ const ProcureAsset = () => {
     }));
   };
 
-  const handleProcure = (e) => {
-    e.preventDefault();
-    const newAsset = { ...assetData, assetID: editingAsset ? editingAsset.assetID : Date.now() };
-    editingAsset ? updateAsset(newAsset) : addAsset(newAsset);
-    setConfirmationMessage(true);
-    resetForm();
-  };
+
 
   const resetForm = () => {
     setAssetData({
@@ -116,16 +141,15 @@ const ProcureAsset = () => {
     setSearchTerm(event.target.value);
   };
 
+
+
   const filteredAssets = assets.filter((asset) =>
-    Object.values(asset).some((value) => {
-      if (typeof value === 'string') {
-        return value.toLowerCase().includes(searchTerm.toLowerCase());
-      } else if (typeof value === 'number') {
-        return value.toString().includes(searchTerm);
-      }
-      return false;
-    })
+    ['vendor', 'assetType', 'manufacturer', 'serialNumber'].some(key => 
+      asset[key]?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
   );
+
+  
   const handleEdit = (asset) => {
     setAssetData(asset);
     setEditingAsset(asset);
@@ -144,9 +168,16 @@ const ProcureAsset = () => {
             <FormControl fullWidth>
               <InputLabel>Vendor *</InputLabel>
               <Select name="vendor" value={assetData.vendor} onChange={handleChange} variant="outlined" required>
-                <MenuItem value="Vendor1">Vendor1</MenuItem>
-                <MenuItem value="Vendor2">Vendor2</MenuItem>
-                <MenuItem value="Vendor3">Vendor3</MenuItem>
+                <MenuItem value="C_PROMPT">C_PROMPT</MenuItem>
+                <MenuItem value="Sriveda">Sriveda</MenuItem>
+                <MenuItem value="CTC_Adiko">CTC_Adiko</MenuItem>
+                <MenuItem value="Butterfly">Butterfly</MenuItem>
+                <MenuItem value="Lappycare">Lappycare</MenuItem>
+                <MenuItem value="Lenovo_KPHB">Lenovo_KPHB</MenuItem>
+                <MenuItem value="Lenovo_Madhapur">Lenovo_Madhapur</MenuItem>
+                <MenuItem value="Lenovo_HSR_Layout">Lenovo_HSR_Layout</MenuItem>
+                <MenuItem value="UD">UD</MenuItem>
+               
               </Select>
             </FormControl>
             <TextField label="Model" name="model" variant="outlined" fullWidth required value={assetData.model} onChange={handleChange} style={{ marginTop: 16 }} />
@@ -270,9 +301,9 @@ const ProcureAsset = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredAssets.map((asset) => (
-              <TableRow key={asset.assetID}>
-                <TableCell>{asset.assetID}</TableCell>
+            {tableData.map((asset) => (
+              <TableRow key={asset.hostID}>
+                <TableCell>{asset.hostID}</TableCell>
                 <TableCell>{asset.vendor}</TableCell>
                 <TableCell>{asset.assetType}</TableCell>
                 <TableCell>{asset.manufacturer}</TableCell>
@@ -304,20 +335,22 @@ const ProcureAsset = () => {
                 <TableCell>{asset.manufacturerYear}</TableCell>
                 <TableCell>{asset.serviceCode}</TableCell>
                 <TableCell>
-                  {asset.uploadedFiles.length > 0 ? (
+                  {asset?.uploadedFiles?.length > 0 ? (
                     <div>
                       {asset.uploadedFiles.map((fileName, index) => (
-                        <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
-                          <div key={index}>
+                        <Box 
+                          key={index} 
+                          display={'flex'} 
+                          flexDirection={'row'} 
+                          alignItems={'center'} 
+                          justifyContent={'space-between'}
+                        >
+                          <div>
                             <Typography>{fileName}</Typography>
-                            {/* <a href={`#`} target="_blank" rel="noopener noreferrer">{fileName}</a>  */}
+                            {/* <a href={`#`} target="_blank" rel="noopener noreferrer">{fileName}</a> */}
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
-                            <a
-                              href={`#`}
-                              download={fileName}
-                              style={{ marginRight: '0.5rem' }}
-                            >
+                            <a href={`#`} download={fileName} style={{ marginRight: '0.5rem' }}>
                               <DownloadIcon />
                             </a>
                             <DeleteIcon
@@ -332,6 +365,7 @@ const ProcureAsset = () => {
                     'No Files Uploaded'
                   )}
                 </TableCell>
+
                 <TableCell>
                   <Button onClick={() => handleEdit(asset)}>Edit</Button>
                 </TableCell>

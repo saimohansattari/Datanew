@@ -1,9 +1,9 @@
 
-import React, { useState, useContext, useEffect } from 'react';
-import { Button, TextField, MenuItem, FormControl, TableCell, Table, TableContainer, TableBody, TableHead, Paper, TableRow, InputLabel, Select, Grid, Typography, InputAdornment, Box } from '@mui/material';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import { AssetContext } from '../context/AssetContext'
+import { Box, Button, FormControl, InputAdornment, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AssetContext } from '../context/AssetContext';
 
 const EditAsset = () => {
   const { assets, updateAsset } = useContext(AssetContext);

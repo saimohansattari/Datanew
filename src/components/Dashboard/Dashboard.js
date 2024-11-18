@@ -1,35 +1,62 @@
-import React, { useContext } from 'react';
-import { AssetContext } from '../../context/AssetContext';
-import { Card, CardContent, Typography, Grid, Box } from '@mui/material';
-import { PieChart, Pie, Tooltip, Cell } from 'recharts';
-
+import { Box, Card, CardContent, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Cell, Pie, PieChart, Tooltip } from 'recharts';
+ 
+ 
 const Dashboard = () => {
-  const { availableAssets, allocatedAssets } = useContext(AssetContext);
+  const [assetData, setAssetData] = useState([]);
+ 
+  useEffect(() => {
+    fetch("http://localhost:8080/api/assets?status.equals")
+      .then((response) => response.json())
+      .then((data) => setAssetData(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
+ 
+  console.log(assetData)
+  const totalAssestCount =assetData.length;
+  console.log(totalAssestCount)
+ 
+  const availableAssetsCount = assetData.filter(assests=> assests.status=== "AVAILABLE").length
+  console.log(availableAssetsCount)
+ 
+  const allocatedAssetsCount = assetData.filter(assests => assests.status === "ALLOCATED").length
+  console.log(allocatedAssetsCount)
+ 
+  const disposedAssetsCount = assetData.filter(assests=>assests.status ==="DISPOSED").length
+  console.log(disposedAssetsCount)
+ 
   const data = [
     {
       name: 'Total Assets',
-      count: availableAssets?.length + allocatedAssets?.length || 0,
+      count: totalAssestCount,
       color: '#bbdefb', // Light blue
     },
     {
       name: 'Available Assets',
-      count: availableAssets?.length || 0,
+      count: availableAssetsCount,
       color: '#c8e6c9', // Light green
     },
     {
       name: 'Allocated Assets',
-      count: allocatedAssets?.length || 0,
+      count: allocatedAssetsCount,
       color: '#ffe0b2', // Light orange
     },
+    {
+      name: 'Disposed Assets',
+      count: disposedAssetsCount,
+      color: '#b4b4b4', // Light orange
+    },
   ];
-
+ 
   const chartData = [
-    { name: 'Available Assets', value: availableAssets?.length || 0 },
-    { name: 'Allocated Assets', value: allocatedAssets?.length || 0 },
+    { name: 'Available Assets', value: availableAssetsCount },
+    { name: 'Allocated Assets', value: allocatedAssetsCount },
+    { name: 'Disposed Assets', value: disposedAssetsCount },
   ];
-
+ 
   const COLORS = ['#1b5e20', '#ff6f00'];
-
+ 
   return (
     <Box padding={3}>
       <Typography variant="h4" align="center" gutterBottom>
@@ -37,7 +64,7 @@ const Dashboard = () => {
       </Typography>
       <Grid container spacing={3}>
         {data.map((item) => (
-          <Grid item xs={12} sm={4} key={item.name}>
+          <Grid item xs={8} sm={3} key={item.name}>
             <Card sx={{ backgroundColor: item.color }}>
               <CardContent>
                 <Typography variant="h6" color="text.secondary" component="div">
@@ -54,12 +81,12 @@ const Dashboard = () => {
       <Grid container display={'flex'} justifyContent={'center'} alignItems={'center'} flexDirection={'column'} marginTop={5} >
         <Grid item xs={12} sm={8} border={'1px solid #e0e0e0'}>
           <PieChart width={400} height={300}>
-            <text x={200} y={30} textAnchor="middle" dominantBaseline="middle" style={{ fontSize: '20px', fontWeight: 'bold' }}>
+            <text x={300} y={30} textAnchor="middle" dominantBaseline="middle" style={{ fontSize: '20px', fontWeight: 'bold' }}>
               Asset Distribution
             </text>
             <Pie
               data={chartData}
-              cx={200} // Center x position
+              cx={300} // Center x position
               cy={200} // Center y position
               labelLine={false}
               outerRadius={80}
@@ -90,11 +117,11 @@ const Dashboard = () => {
             ))}
           </Box>
         </Grid>
-
+ 
       </Grid>
-
+ 
     </Box>
   );
 };
-
+ 
 export default Dashboard;
